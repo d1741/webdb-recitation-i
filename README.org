@@ -12,16 +12,49 @@
    
    You can exit by pressing ~CTRL-d~. View the tables and their schema with the
    commands ~.tables~ and ~.schema tableName~.
-   
 *** Find all books with a ~publisher_id~ of 2
+    #+begin_src sql
+      SELECT * FROM books WHERE publisher_id IS 2;
+    #+end_src
 *** Find the title, cover_url of the book with the id of 1
+    #+begin_src sql
+      SELECT title, cover_url FROM books WHERE id IS 1;
+    #+end_src
 *** Find the title and year of the oldest 3 books
+    #+begin_src sql
+      SELECT title, year FROM books ORDER BY year ASC LIMIT 3;
+    #+end_src
 *** Find all reviews for books with id's 3, 4 and 5
+    #+begin_src sql
+      SELECT * FROM reviews WHERE id IN (3, 4, 5);
+    #+end_src
+    #+begin_src sql
+      SELECT * FROM reviews WHERE book_id IS 3 OR book_id IS 4 OR book_id IS 5
+    #+end_src
 *** Add a review for book 1, from user 8 with a rating of 3 and a comment of 'Okay'
+    #+begin_src sql
+      INSERT INTO reviews (rating, comment, book_id, user_id) VALUES (3, 'Okay', 1, 8);
+    #+end_src
 *** Change your review to be a rating 5 of and a comment of 'Amazing Cover!''
+    #+begin_src sql
+      UPDATE reviews SET comment = 'Amazing Cover!', rating = 5 WHERE book_id IS 1 AND user_id IS 8;
+    #+end_src
 *** Find how many different years books were published in. How many books were published in each year?
+    #+begin_src sql
+      SELECT COUNT(DISTINCT year) FROM books;
+    #+end_src
+    #+begin_src sql
+      SELECT year, COUNT(year) as num_published FROM books GROUP BY year ORDER BY num_published DESC;
+    #+end_src
 *** What is the average review of each book?
+    #+begin_src sql
+      SELECT book_id, AVG(rating) as avg_rating FROM reviews GROUP BY book_id ORDER BY avg_rating DESC;
+    #+end_src
 *** Which book has the longest description?
+    #+begin_src sql
+      SELECT title, description from books order by length(description) desc limit 1;
+    #+end_src
+   
 ** API
    Write CRUD endpoints for the reviews resource. Ideally, separate out your
    database interactions into a 'model' file and import that into your 'router'
