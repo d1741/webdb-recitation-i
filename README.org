@@ -1,0 +1,39 @@
+* WebDB Recitation I
+
+  I'm trying something new today. This is a project similar, but distinct from
+  the afternoon project. The goal is to cover much of the same ground, but in a
+  way that allows this to remain up for future cohorts to enjoy.
+
+** Queries
+   You can connect to a local sqlite database on the command line by running the
+   command ~sqlite3 dbName.sqlite3~. Navigate into the ~/data~ directory and open
+   the ~dev.sqlite3~ database this way. You can now run SQL queries against it.
+   (Don't forget to end your commands with a ~;~).
+   
+   You can exit by pressing ~CTRL-d~. View the tables and their schema with the
+   commands ~.tables~ and ~.schema tableName~.
+   
+*** Find all books with a ~publisher_id~ of 2
+*** Find the title, cover_url of the book with the id of 1
+*** Find the title and year of the oldest 3 books
+*** Find all reviews for books with id's 3, 4 and 5
+*** Add a review for book 1, from user 8 with a rating of 3 and a comment of 'Okay'
+*** Change your review to be a rating 5 of and a comment of 'Amazing Cover!''
+*** Find how many different years books were published in. How many books were published in each year?
+*** What is the average review of each book?
+*** Which book has the longest description?
+** API
+   Write CRUD endpoints for the reviews resource. Ideally, separate out your
+   database interactions into a 'model' file and import that into your 'router'
+   file.
+   
+   | field   | data type             | metadata                    |
+   | id      | unsigned int          | primary key, auto           |
+   | rating  | floating point number | 1-5, required               |
+   | book_id | unsigned int          | foreign key, 1-15, required |
+   | user_id | unsigned int          | foreign key, 1-6, required  |
+   | comment | string                | not required                |
+
+   
+   Handle query parameters to the ~GET /api/reviews~ endpoint that may contain
+   ~limit~, ~sortby~ and ~sortdir~.
