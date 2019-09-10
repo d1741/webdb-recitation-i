@@ -11,7 +11,12 @@
    (Don't forget to end your commands with a ~;~).
    
    You can exit by pressing ~CTRL-d~. View the tables and their schema with the
-   commands ~.tables~ and ~.schema tableName~.
+   commands ~.tables~ and ~.schema --indent table_name~. For a more legible list of
+   a tables columns use ~PRAGMA table_info('table_name')~. To have column names
+   appear in query output run ~.headers ON~ and ~.mode column~.
+   
+   See https://sqlite.org/cli.html for more configuration options.
+
 *** Find all books with a ~publisher_id~ of 2
     #+begin_src sql
       SELECT * FROM books WHERE publisher_id IS 2;
